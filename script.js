@@ -172,11 +172,13 @@
     }
   }
 
-  function spawnFireworks(){
+function spawnFireworks(){
     var bursts = [
       {x:22, y:32, delay:0},
-      {x:74, y:22, delay:260},
-      {x:50, y:44, delay:520}
+      {x:74, y:22, delay:200},
+      {x:50, y:44, delay:400},
+      {x:30, y:60, delay:650},
+      {x:80, y:50, delay:850}
     ];
     bursts.forEach(function(b){
       setTimeout(function(){ spawnFireworkBurst(b.x, b.y); }, b.delay);
