@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101722">
+<title>Flight 23 — Nantes → Vienna</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="intro" id="intro">
+
+  <div class="intro-step" id="introStep1">
+    <div class="intro-logo">KZ AIRWAYS</div>
+    <div class="intro-sub">PRIVATE FLIGHT</div>
+  </div>
+
+  <div class="intro-step" id="introStep2">
+    <div class="intro-route">
+      <div class="intro-city">
+        <span class="code">NTE</span>
+        <span class="name">Nantes</span>
+      </div>
+      <div class="intro-route-line"><span>✈</span></div>
+      <div class="intro-city right">
+        <span class="code">VIE</span>
+        <span class="name">Vienna</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="intro-step" id="introStep3">
+    <div class="intro-23"><span class="digit">2</span><span class="digit">3</span></div>
+  </div>
+
+  <div class="intro-step" id="introStep4">
+    <div class="intro-birthday">HAPPY<span>23RD BIRTHDAY</span></div>
+  </div>
+
+  <div class="intro-step" id="introStep5">
+    <div class="intro-ready">BOARDING PASS READY</div>
+    <button class="intro-btn" id="introBtn">OPEN MY FLIGHT →</button>
+  </div>
+
+</div>
+
+<div class="page">
+
+  <!-- COVER -->
+  <section class="cover">
+
+    <div class="cover-top">
+      <div class="logo">KZ AIRWAYS</div>
+      <div class="cover-date">23 · 08 · 2026</div>
+    </div>
+
+    <div class="cover-main">
+      <div class="eyebrow">BOARDING PASS · SPECIAL EDITION</div>
+
+      <div class="birthday-stamp" aria-hidden="true">
+        <span class="birthday-stamp-top">HAPPY</span>
+        <span class="birthday-stamp-mid">★</span>
+        <span class="birthday-stamp-bottom">BIRTHDAY</span>
+      </div>
+
+      <h1>23</h1>
+
+      <div class="cover-sub">
+        For Nune — the most important passenger<br>
+        in my world.
+      </div>
+
+      <div class="cover-route">
+        <div class="city">
+          <span class="city-code">NTE</span>
+          <span class="city-name">Nantes</span>
+        </div>
+
+        <div class="route-line"></div>
+
+        <div class="city right">
+          <span class="city-code">VIE</span>
+          <span class="city-name">Vienna</span>
+        </div>
+      </div>
+
+      <button class="enter" onclick="document.getElementById('ticket').scrollIntoView({behavior:'smooth'})">
+        Open your boarding pass →
+      </button>
+    </div>
+
+    <div class="cover-bottom">
+      <div class="cover-meta">
+        <small>Passenger</small>
+        <strong>Kenzo</strong>
+      </div>
+
+      <div class="cover-meta center">
+        <small>Flight</small>
+        <strong>23</strong>
+      </div>
+
+      <div class="cover-meta right">
+        <small>Destination</small>
+        <strong>You</strong>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- BOARDING PASS -->
+  <section class="ticket" id="ticket">
+
+    <div class="ticket-head">
+
+      <div class="ticket-brand">
+        <span>KZ AIRWAYS</span>
+        <div>
+          <div class="ticket-title">BOARDING PASS <span class="flight-number">#23</span></div>
+          <div class="ticket-for">Issued to Nune</div>
+        </div>
+      </div>
+
+      <div class="route">
+        <div>
+          <div class="route-city">NTE</div>
+          <div class="route-label">Nantes · France</div>
+        </div>
+
+        <div class="route-middle">
+          <div class="plane">✈</div>
+        </div>
+
+        <div style="text-align:right">
+          <div class="route-city">VIE</div>
+          <div class="route-label">Vienna · Austria</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ticket-info">
+      <div class="info">
+        <label>Passenger</label>
+        <strong>Kenzo</strong>
+      </div>
+      <div class="info">
+        <label>Flight</label>
+        <strong>KZ-023</strong>
+      </div>
+      <div class="info">
+        <label>Seat</label>
+        <strong>23A</strong>
+      </div>
+      <div class="info">
+        <label>Gate</label>
+        <strong>LOVE</strong>
+      </div>
+      <div class="info">
+        <label>Date</label>
+        <strong>23 AUG 26</strong>
+      </div>
+      <div class="info">
+        <label>Class</label>
+        <strong>FIRST</strong>
+      </div>
+      <div class="info">
+        <label>Status</label>
+        <strong>CONFIRMED</strong>
+      </div>
+      <div class="info">
+        <label>Baggage</label>
+        <strong>1 HEART</strong>
+      </div>
+    </div>
+
+    <div class="ticket-body">
+
+      <div class="ticket-stamp" aria-hidden="true">
+        <div class="stamp-ring">
+          <span class="stamp-word">VALIDATED</span>
+          <span class="stamp-check">✓</span>
+          <span class="stamp-date">23·08·2026</span>
+        </div>
+      </div>
+
+      <p class="ticket-message">
+        This flight only ever had one destination:
+        <em>you.</em>
+      </p>
+
+      <div class="perforation"></div>
+
+      <div class="barcode"></div>
+      <div class="barcode-number">230823 · NTEVIE · ALWAYS</div>
+
+      <div class="ticket-footer">
+        <div class="qr-code" aria-hidden="true">
+          <i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i>
+          <i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i>
+          <i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i>
+          <i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i>
+          <i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i>
+          <i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i>
+          <i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i>
+        </div>
+        <div class="ticket-footer-text">
+          RES. N° NV23·KZ·0823<br>
+          BOARDING GROUP 23<br>
+          <span class="nonrefundable">NON-REFUNDABLE — I'm keeping you.</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ROUTE MAP -->
+  <section class="mapsection" id="mapsection">
+
+    <div class="map-kicker">EN ROUTE</div>
+    <div class="map-title">Nantes → Vienna</div>
+
+    <div class="map-card" id="mapCard">
+      <svg class="map-svg" viewBox="0 0 400 150" preserveAspectRatio="none">
+        <g class="map-grid">
+          <line x1="0" y1="30" x2="400" y2="30"/>
+          <line x1="0" y1="75" x2="400" y2="75"/>
+          <line x1="0" y1="120" x2="400" y2="120"/>
+          <line x1="80" y1="0" x2="80" y2="150"/>
+          <line x1="160" y1="0" x2="160" y2="150"/>
+          <line x1="240" y1="0" x2="240" y2="150"/>
+          <line x1="320" y1="0" x2="320" y2="150"/>
+        </g>
+        <path id="routePath" class="route-path" d="M40,115 Q200,25 360,60" fill="none" stroke="#c5a35a" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="40" cy="115" r="3.5" fill="#c5a35a"/>
+        <circle cx="360" cy="60" r="3.5" fill="#c5a35a"/>
+      </svg>
+      <span class="map-ping left" aria-hidden="true"></span>
+      <span class="map-ping right" aria-hidden="true"></span>
+      <div class="map-plane">✈</div>
+      <div class="map-distance">1 235 KM · 2H35</div>
+      <div class="map-label left">
+        <span class="code">NTE</span>
+        <span class="name">Nantes</span>
+      </div>
+      <div class="map-label right">
+        <span class="code">VIE</span>
+        <span class="name">Vienna</span>
+      </div>
+    </div>
+
+    <div class="map-arrival">
+      <div class="arrival-kicker">ARRIVED IN VIENNA</div>
+      <div class="arrival-text">but my favorite destination is you.</div>
+    </div>
+
+  </section>
+
+
+  <!-- LOVE POST -->
+  <section class="postal" id="postal">
+    <div class="postal-private">Private &amp; Personal</div>
+    <div class="postal-addr">
+      <b>From</b>
+      Kenzo<br>Nantes, France
+      <b>To</b>
+      Nune<br>Vienna, Austria
+    </div>
+    <div class="postmark" id="postmark">
+      <span>NANTES → VIENNA</span>
+      <strong>NUNE·23</strong>
+      <span>23 AUG 2026</span>
+    </div>
+  </section>
+
+
+  <!-- LETTER -->
+  <section class="letter">
+
+    <div class="letter-inner">
+
+      <div class="letter-top">
+        <div class="letter-kicker">
+          PRIVATE LETTER<br>
+          FOR PASSENGER 23
+        </div>
+
+        <div class="stamp">
+          <strong>23</strong>
+          <small>LOVE POST</small>
+        </div>
+      </div>
+
+      <h2>
+        Happy birthday,<br>
+        <span>my love.</span>
+      </h2>
+
+      <div class="letter-photo right" style="--tilt:-4deg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
+        <label>Add photo</label>
+      </div>
+
+      <!--
+        REPLACE THE TEXT BELOW WITH YOUR OWN WORDS IF YOU WANT.
+        The design is ready — you should only need to edit the content.
+      -->
+
+      <p>
+        My love, today is your day. The day you were born 23 years ago,
+        with that number you love so much — one that today feels like it
+        was made just for you.
+      </p>
+
+      <p>
+        Since February, our story has taken a place in my life I could never
+        have planned for. And even though Nantes and Vienna stand between us
+        right now, I've never felt that the distance could really pull us apart.
+      </p>
+
+      <div class="letter-photo left" style="--tilt:3deg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
+        <label>Add photo</label>
+      </div>
+
+      <div class="highlight">
+        <p>
+          "Two cities. Miles between us. And yet, every time I think of you,
+          you feel like you're right next to me."
+        </p>
+      </div>
+
+      <div class="memories">
+        <div class="memory">
+          <strong>02</strong>
+          <span>Our story begins</span>
+        </div>
+
+        <div class="memory">
+          <strong>06</strong>
+          <span>Days in Lisbon</span>
+        </div>
+
+        <div class="memory">
+          <strong>23</strong>
+          <span>Your day</span>
+        </div>
+      </div>
+
+      <div class="letter-photo right" style="--tilt:2.5deg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
+        <label>Add photo</label>
+      </div>
+
+      <p>
+        And then there was Lisbon. Six days that belonged only to us. Six days
+        with no screen between us, no counting hours before a call or miles
+        before we could finally meet again.
+      </p>
+
+      <p>
+        Those six days were incredible, and I think they made me understand
+        even more how good I feel with you. Walking with you, laughing with
+        you, discovering a city together and just enjoying every moment —
+        that's exactly the kind of memories I want to keep building with you.
+      </p>
+
+      <div class="divider">
+        <span>NEXT DESTINATION</span>
+      </div>
+
+      <div class="letter-photo left" style="--tilt:-3deg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
+        <label>Add photo</label>
+      </div>
+
+      <p>
+        The next destination might not be written yet. But what I know is
+        that I want to keep taking flights, taking trains, covering the
+        miles, and looking forward to the next moment I get to see you again.
+      </p>
+
+      <p>
+        For your 23rd birthday, I just want you to know how happy I am to
+        have met you, and how much you mean to me.
+      </p>
+
+      <div class="signature">
+        <div class="small">WITH LOVE · FROM NANTES</div>
+        <div class="name">Kenzo</div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- LISBON ARCHIVE -->
+  <section class="archive">
+
+    <div class="archive-kicker">RECENT TRIP</div>
+    <div class="archive-title">Lisbon, Portugal</div>
+    <div class="archive-meta">06 DAYS · 02 PEOPLE · 01 CITY</div>
+
+    <div class="archive-grid">
+      <div class="photo-slot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
+        <label>Add photo</label>
+        <span>TRAVEL ARCHIVE / 01</span>
+      </div>
+      <div class="photo-slot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
+        <label>Add photo</label>
+        <span>TRAVEL ARCHIVE / 02</span>
+      </div>
+      <div class="photo-slot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
+        <label>Add photo</label>
+        <span>TRAVEL ARCHIVE / 03</span>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- TRAVEL HISTORY -->
+  <section class="history">
+
+    <div class="history-kicker">OUR JOURNEY</div>
+    <div class="history-title">Travel History</div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">FEB 2026</div>
+        <div class="tl-place">Nantes</div>
+        <div class="tl-desc">First departure</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">30 MAY 2026</div>
+        <div class="tl-place">Vienna</div>
+        <div class="tl-desc">Distance begins</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">AUG 2026</div>
+        <div class="tl-place">Lisbon</div>
+        <div class="tl-desc">6 days together</div>
+      </div>
+      <div class="tl-item now">
+        <div class="tl-date">23 AUG 2026</div>
+        <div class="tl-place">Vienna</div>
+        <div class="tl-desc">23rd birthday</div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- FINAL -->
+  <section class="final" id="final">
+
+    <div class="confetti" id="confetti"></div>
+    <div class="fireworks" id="fireworks"></div>
+
+    <div class="final-kicker" id="finalStep1">FLIGHT 23</div>
+
+    <h2 id="finalStep2">ARRIVED</h2>
+
+    <div class="final-line" id="finalStep3"></div>
+
+    <p id="finalStep4">
+      DESTINATION: <em>YOU</em>
+    </p>
+
+    <div class="final-note" id="finalStep5">No return flight booked.</div>
+
+    <div class="final-date" id="finalStep6">23 · 08 · 2026</div>
+
+    <div class="final-plane" id="finalPlane">✈</div>
+
+  </section>
+
+</div>
+
+
+<!-- PHOTO LIGHTBOX -->
+<div class="photo-lightbox" id="photoLightbox" aria-hidden="true">
+  <button class="photo-lightbox-close" id="photoLightboxClose" aria-label="Close photo">×</button>
+  <div class="photo-polaroid" id="photoPolaroid">
+    <img id="photoLightboxImage" src="" alt="">
+    <div class="photo-polaroid-caption" id="photoLightboxCaption"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
