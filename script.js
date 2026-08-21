@@ -1,5 +1,32 @@
 (function(){
 
+  /* Party mode toggle: pause/resume confetti + balloons */
+  var partyOff = false;
+  try {
+    partyOff = window.localStorage.getItem('partyMode') === 'off';
+  } catch(e){}
+
+  function applyPartyState(){
+    document.documentElement.classList.toggle('party-off', partyOff);
+    var toggle = document.getElementById('partyToggle');
+    var icon = document.getElementById('partyToggleIcon');
+    var label = document.getElementById('partyToggleLabel');
+    if(toggle) toggle.setAttribute('aria-pressed', partyOff ? 'true' : 'false');
+    if(icon) icon.textContent = partyOff ? '🔕' : '🎉';
+    if(label) label.textContent = partyOff ? 'Reprendre' : 'Pause';
+  }
+
+  applyPartyState();
+
+  var partyToggleBtn = document.getElementById('partyToggle');
+  if(partyToggleBtn){
+    partyToggleBtn.addEventListener('click', function(){
+      partyOff = !partyOff;
+      try { window.localStorage.setItem('partyMode', partyOff ? 'off' : 'on'); } catch(e){}
+      applyPartyState();
+    });
+  }
+
   /* Click any real photo to open it full-screen in a polaroid. */
   var photoLightbox = document.getElementById('photoLightbox');
   var photoLightboxImage = document.getElementById('photoLightboxImage');
@@ -44,6 +71,38 @@
 
   document.documentElement.classList.add('intro-lock');
 
+  /* Ambient confetti rain across the whole page */
+  var ambientConfetti = document.getElementById('ambientConfetti');
+  var reduceMotionGlobal = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(ambientConfetti && !reduceMotionGlobal && !partyOff){
+    var ambientCount = 24;
+    for(var a=0; a<ambientCount; a++){
+      var ap = document.createElement('i');
+      ap.style.left = (Math.random()*100) + '%';
+      ap.style.animationDuration = (9 + Math.random()*7) + 's';
+      ap.style.animationDelay = (Math.random()*14) + 's';
+      ambientConfetti.appendChild(ap);
+    }
+  }
+
+  /* Generic section-confetti activator: adds .active to any section
+     with a .section-confetti child once it enters the viewport */
+  var confettiSections = document.querySelectorAll('.mapsection, .gifts-section, .archive, .history');
+  if('IntersectionObserver' in window){
+    var sectionConfettiObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('active');
+          sectionConfettiObserver.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.35});
+    confettiSections.forEach(function(sec){ sectionConfettiObserver.observe(sec); });
+  } else {
+    confettiSections.forEach(function(sec){ sec.classList.add('active'); });
+  }
+
   var steps = ['introStep1','introStep2','introStep3','introStep4'];
   var delays = [300, 2100, 4000, 5900];
 
@@ -56,10 +115,28 @@
     }, delays[i]);
   });
 
+  var welcomeBurst = document.getElementById('welcomeBurst');
+
+  function spawnWelcomeBurst(){
+    if(!welcomeBurst || partyOff) return;
+    var count = 60;
+    for(var i=0;i<count;i++){
+      var piece = document.createElement('i');
+      piece.style.left = (Math.random()*100) + '%';
+      piece.style.animationDelay = (Math.random()*0.6) + 's';
+      piece.style.animationDuration = (2.4 + Math.random()*1.2) + 's';
+      welcomeBurst.appendChild(piece);
+    }
+    setTimeout(function(){
+      welcomeBurst.innerHTML = '';
+    }, 4200);
+  }
+
   document.getElementById('introBtn').addEventListener('click', function(){
     var intro = document.getElementById('intro');
     intro.classList.add('closing');
     document.documentElement.classList.remove('intro-lock');
+    spawnWelcomeBurst();
     setTimeout(function(){
       intro.style.display = 'none';
     }, 950);
@@ -119,6 +196,36 @@
     ticket.classList.add('active');
   }
 
+  /* Blow-out birthday candle on the cover */
+  var coverCandle = document.getElementById('coverCandle');
+  var coverConfetti = document.getElementById('coverConfetti');
+  var coverHint = document.getElementById('coverHint');
+
+  function spawnCoverConfettiBurst(){
+    if(!coverConfetti || partyOff) return;
+    coverConfetti.innerHTML = '';
+    var count = 22;
+    for(var i=0;i<count;i++){
+      var piece = document.createElement('i');
+      piece.style.left = (5 + Math.random()*90) + '%';
+      piece.style.animationDelay = (Math.random()*0.4) + 's';
+      piece.style.animationDuration = (1.8 + Math.random()*0.8) + 's';
+      coverConfetti.appendChild(piece);
+    }
+  }
+
+  if(coverCandle){
+    coverCandle.addEventListener('click', function(){
+      if(coverCandle.classList.contains('blown')) return;
+      coverCandle.classList.add('blown');
+      if(coverHint) coverHint.style.display = 'none';
+      spawnCoverConfettiBurst();
+      setTimeout(function(){
+        if(coverConfetti) coverConfetti.innerHTML = '';
+      }, 2600);
+    });
+  }
+
   var postal = document.getElementById('postal');
   if('IntersectionObserver' in window){
     var postalObserver = new IntersectionObserver(function(entries){
@@ -140,7 +247,8 @@
   var fireworkColors = ['#c5a35a','#f6f0e4','#c7473b'];
 
   function spawnConfetti(){
-    var count = 26;
+    if(partyOff) return;
+    var count = 46;
     for(var i=0;i<count;i++){
       var piece = document.createElement('i');
       piece.style.left = (8 + Math.random()*84) + '%';
@@ -173,12 +281,17 @@
   }
 
 function spawnFireworks(){
+    if(partyOff) return;
     var bursts = [
       {x:22, y:32, delay:0},
       {x:74, y:22, delay:200},
       {x:50, y:44, delay:400},
       {x:30, y:60, delay:650},
-      {x:80, y:50, delay:850}
+      {x:80, y:50, delay:850},
+      {x:15, y:70, delay:1100},
+      {x:60, y:20, delay:1300},
+      {x:90, y:65, delay:1550},
+      {x:40, y:78, delay:1800}
     ];
     bursts.forEach(function(b){
       setTimeout(function(){ spawnFireworkBurst(b.x, b.y); }, b.delay);
