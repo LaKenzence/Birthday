@@ -14,14 +14,29 @@
 </head>
 
 <body>
-  
+
+<button class="party-toggle" id="partyToggle" type="button" aria-pressed="false">
+  <span class="icon" id="partyToggleIcon">🎉</span>
+  <span id="partyToggleLabel">Pause</span>
+</button>
+
+<div class="ambient-confetti" id="ambientConfetti" aria-hidden="true"></div>
+
+<div class="festive-confetti-bg" aria-hidden="true"></div>
+
 <div class="festive-balloons">
-  <div class="balloon gold" style="left: 8%; animation-delay: 0s;"></div>
-  <div class="balloon red" style="left: 22%; animation-delay: 3s;"></div>
-  <div class="balloon cream" style="left: 50%; animation-delay: 1.5s;"></div>
-  <div class="balloon gold" style="left: 78%; animation-delay: 4.5s;"></div>
-  <div class="balloon red" style="left: 90%; animation-delay: 2s;"></div>
+  <div class="balloon gold" style="left: 5%; animation-delay: 0s, .2s;"></div>
+  <div class="balloon red" style="left: 16%; animation-delay: 2.2s, .6s;"></div>
+  <div class="balloon blush" style="left: 27%; animation-delay: .8s, 0s;"></div>
+  <div class="balloon cream" style="left: 40%; animation-delay: 3.4s, .9s;"></div>
+  <div class="balloon gold" style="left: 52%; animation-delay: 1.5s, .3s;"></div>
+  <div class="balloon red" style="left: 63%; animation-delay: 4s, .7s;"></div>
+  <div class="balloon blush" style="left: 74%; animation-delay: 2.6s, .1s;"></div>
+  <div class="balloon cream" style="left: 85%; animation-delay: .4s, .5s;"></div>
+  <div class="balloon gold" style="left: 94%; animation-delay: 3.1s, .8s;"></div>
 </div>
+
+<div class="welcome-burst" id="welcomeBurst" aria-hidden="true"></div>
 
 <div class="intro" id="intro">
 
@@ -45,10 +60,36 @@
   </div>
 
   <div class="intro-step" id="introStep3">
+    <div class="intro-cake" aria-hidden="true">
+      <svg class="intro-candle" viewBox="0 0 40 90">
+        <rect x="16" y="30" width="8" height="55" rx="3" fill="var(--gold)"/>
+        <ellipse class="flame" cx="20" cy="14" rx="7" ry="12" fill="#f6d67a"/>
+        <ellipse class="flame" cx="20" cy="17" rx="3.5" ry="6" fill="#e8873b"/>
+      </svg>
+      <svg class="intro-candle" viewBox="0 0 40 90">
+        <rect x="16" y="30" width="8" height="55" rx="3" fill="var(--red)"/>
+        <ellipse class="flame" cx="20" cy="14" rx="7" ry="12" fill="#f6d67a"/>
+        <ellipse class="flame" cx="20" cy="17" rx="3.5" ry="6" fill="#e8873b"/>
+      </svg>
+    </div>
     <div class="intro-23"><span class="digit">2</span><span class="digit">3</span></div>
   </div>
 
   <div class="intro-step" id="introStep4">
+    <div class="intro-burst" aria-hidden="true">
+      <i style="left:10%;animation-delay:.05s;"></i>
+      <i style="left:20%;animation-delay:.25s;"></i>
+      <i style="left:30%;animation-delay:.05s;"></i>
+      <i style="left:40%;animation-delay:.4s;"></i>
+      <i style="left:50%;animation-delay:.1s;"></i>
+      <i style="left:60%;animation-delay:.3s;"></i>
+      <i style="left:70%;animation-delay:.15s;"></i>
+      <i style="left:80%;animation-delay:.35s;"></i>
+      <i style="left:90%;animation-delay:.2s;"></i>
+      <i style="left:15%;animation-delay:.5s;"></i>
+      <i style="left:65%;animation-delay:.45s;"></i>
+      <i style="left:85%;animation-delay:.55s;"></i>
+    </div>
     <div class="intro-ready">BOARDING PASS READY</div>
     <button class="intro-btn" id="introBtn">OPEN MY FLIGHT →</button>
   </div>
@@ -60,6 +101,18 @@
   <!-- COVER -->
   <section class="cover">
 
+    <div class="bunting" aria-hidden="true">
+      <span class="bunting-flag"></span>
+      <span class="bunting-flag"></span>
+      <span class="bunting-flag"></span>
+      <span class="bunting-flag"></span>
+      <span class="bunting-flag"></span>
+      <span class="bunting-flag"></span>
+      <span class="bunting-flag"></span>
+      <span class="bunting-flag"></span>
+      <span class="bunting-flag"></span>
+    </div>
+
     <div class="cover-top">
       <div class="logo">KZ AIRWAYS</div>
       <div class="cover-date">23 · 08 · 2026</div>
@@ -69,7 +122,23 @@
       <div class="eyebrow">BOARDING PASS · SPECIAL EDITION</div>
 
       <h1>23</h1>
-      
+
+      <div class="cover-confetti" id="coverConfetti" aria-hidden="true"></div>
+
+      <span class="cover-hint" id="coverHint">blow it out →</span>
+
+      <svg class="cake-candle" id="coverCandle" viewBox="0 0 40 90" aria-hidden="true">
+        <rect x="16" y="30" width="8" height="55" rx="3" fill="var(--gold)"/>
+        <path d="M16 30 Q20 24 24 30" stroke="var(--gold)" stroke-width="2" fill="none"/>
+        <ellipse class="smoke" cx="20" cy="10" rx="4" ry="7" fill="rgba(200,200,200,.6)"/>
+        <ellipse class="flame" cx="20" cy="14" rx="7" ry="12" fill="#f6d67a"/>
+        <ellipse class="flame" cx="20" cy="17" rx="3.5" ry="6" fill="#e8873b"/>
+      </svg>
+
+      <span class="sparkle s1" style="top:-4px; left:6%;" aria-hidden="true">✦</span>
+      <span class="sparkle s2" style="top:22%; right:8%;" aria-hidden="true">✧</span>
+      <span class="sparkle s3" style="bottom:6%; left:16%;" aria-hidden="true">✦</span>
+
       <div class="birthday-banner">
         <span class="b-flag">H</span>
         <span class="b-flag">A</span>
@@ -130,10 +199,29 @@
   <!-- BOARDING PASS -->
   <section class="ticket" id="ticket">
 
+    <div class="ticket-ribbon" aria-hidden="true">BIRTHDAY EDITION</div>
+    <div class="ticket-confetti" id="ticketConfetti" aria-hidden="true">
+      <i style="left:15%;animation-delay:1.6s;"></i>
+      <i style="left:30%;animation-delay:1.8s;"></i>
+      <i style="left:45%;animation-delay:1.5s;"></i>
+      <i style="left:60%;animation-delay:1.9s;"></i>
+      <i style="left:75%;animation-delay:1.7s;"></i>
+      <i style="left:20%;animation-delay:2s;"></i>
+      <i style="left:55%;animation-delay:1.65s;"></i>
+      <i style="left:85%;animation-delay:1.85s;"></i>
+    </div>
+
     <div class="ticket-head">
 
       <div class="ticket-brand">
-        <span>KZ AIRWAYS</span>
+        <span>
+          <svg class="ticket-cake" viewBox="0 0 40 90" aria-hidden="true">
+            <rect x="16" y="30" width="8" height="55" rx="3" fill="var(--gold)"/>
+            <ellipse class="flame" cx="20" cy="14" rx="7" ry="12" fill="#f6d67a"/>
+            <ellipse class="flame" cx="20" cy="17" rx="3.5" ry="6" fill="#e8873b"/>
+          </svg>
+          KZ AIRWAYS
+        </span>
         <div>
           <div class="ticket-title">BOARDING PASS <span class="flight-number">#23</span></div>
           <div class="ticket-for">Issued to Nune</div>
@@ -267,6 +355,16 @@
   <!-- ROUTE MAP -->
   <section class="mapsection" id="mapsection">
 
+    <div class="section-confetti" aria-hidden="true">
+      <i style="left:12%;"></i><i style="left:24%;animation-delay:.15s;"></i><i style="left:36%;animation-delay:.3s;"></i>
+      <i style="left:48%;animation-delay:.05s;"></i><i style="left:60%;animation-delay:.25s;"></i><i style="left:72%;animation-delay:.1s;"></i>
+      <i style="left:84%;animation-delay:.35s;"></i><i style="left:18%;animation-delay:.4s;"></i><i style="left:90%;animation-delay:.2s;"></i>
+    </div>
+
+    <div class="mini-garland" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
     <div class="map-kicker">EN ROUTE</div>
     <div class="map-title">Nantes → Vienna</div>
 
@@ -340,6 +438,19 @@
           <small>LOVE POST</small>
         </div>
       </div>
+
+      <div class="letter-garland" aria-hidden="true">
+        <span class="flag"></span><span class="flag"></span><span class="flag"></span>
+        <span class="flag"></span><span class="flag"></span><span class="flag"></span>
+        <span class="flag"></span>
+      </div>
+
+      <span class="letter-scrap dot" style="top:6%; left:4%;" aria-hidden="true"></span>
+      <span class="letter-scrap rect gold" style="top:14%; right:6%; transform:rotate(18deg);" aria-hidden="true"></span>
+      <span class="letter-scrap rect red" style="top:42%; left:3%; transform:rotate(-14deg);" aria-hidden="true"></span>
+      <span class="letter-scrap dot" style="top:60%; right:4%;" aria-hidden="true"></span>
+      <span class="letter-scrap rect line" style="top:78%; left:5%; transform:rotate(10deg);" aria-hidden="true"></span>
+      <span class="letter-scrap dot" style="top:92%; right:7%;" aria-hidden="true"></span>
 
       <h2>
         Happy birthday,<br>
@@ -444,7 +555,7 @@
         </div>
 
         <div class="memory">
-          <strong>23</strong>
+          <strong>23<svg class="memory-candle" viewBox="0 0 40 90" aria-hidden="true"><rect x="16" y="30" width="8" height="55" rx="3" fill="var(--gold)"/><ellipse class="flame" cx="20" cy="14" rx="7" ry="12" fill="#f6d67a"/><ellipse class="flame" cx="20" cy="17" rx="3.5" ry="6" fill="#e8873b"/></svg></strong>
           <span>Your day</span>
         </div>
       </div>
@@ -820,7 +931,13 @@
 
 
   <!-- LISBON ARCHIVE -->
-  <section class="archive">
+  <section class="archive" id="archive">
+
+    <div class="section-confetti" aria-hidden="true">
+      <i style="left:10%;"></i><i style="left:22%;animation-delay:.2s;"></i><i style="left:34%;animation-delay:.1s;"></i>
+      <i style="left:46%;animation-delay:.3s;"></i><i style="left:58%;animation-delay:.15s;"></i><i style="left:70%;animation-delay:.35s;"></i>
+      <i style="left:82%;animation-delay:.05s;"></i><i style="left:92%;animation-delay:.25s;"></i>
+    </div>
 
     <div class="archive-kicker">RECENT TRIP</div>
     <div class="archive-title">Lisbon, Portugal</div>
@@ -842,7 +959,12 @@
 
 
   <!-- TRAVEL HISTORY -->
-  <section class="history">
+  <section class="history" id="history">
+
+    <div class="section-confetti" aria-hidden="true">
+      <i style="left:14%;"></i><i style="left:28%;animation-delay:.2s;"></i><i style="left:42%;animation-delay:.1s;"></i>
+      <i style="left:56%;animation-delay:.3s;"></i><i style="left:70%;animation-delay:.15s;"></i><i style="left:84%;animation-delay:.05s;"></i>
+    </div>
 
     <div class="history-kicker">OUR JOURNEY</div>
     <div class="history-title">Travel History</div>
@@ -872,7 +994,13 @@
 
   </section>
 
-  <section class="gifts-section">
+  <section class="gifts-section" id="giftsSection">
+    <div class="section-confetti" aria-hidden="true">
+      <i style="left:8%;"></i><i style="left:20%;animation-delay:.2s;"></i><i style="left:32%;animation-delay:.35s;"></i>
+      <i style="left:44%;animation-delay:.1s;"></i><i style="left:56%;animation-delay:.3s;"></i><i style="left:68%;animation-delay:.15s;"></i>
+      <i style="left:80%;animation-delay:.4s;"></i><i style="left:92%;animation-delay:.05s;"></i>
+    </div>
+    <div class="gifts-banner">🎉 SURPRISE INSIDE 🎉</div>
     <div class="map-kicker">SPECIAL SURPRISES</div>
     <div class="archive-title">Gifts & Promises</div>
     <div class="gifts-grid">
