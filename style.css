@@ -963,10 +963,13 @@ html.intro-lock,html.intro-lock body{
 }
 
 @media(max-width:560px){
-  .letter-photo{
-    float:none;
-    margin:16px auto !important;
-    width:130px;
+  /* Désactive la rotation et supprime le chevauchement sur mobile */
+  .letter-photo {
+    float: none !important;
+    margin: 18px auto !important;
+    width: 140px;
+    transform: none !important; /* Retire l'inclinaison qui fait chevaucher le texte */
+    clear: both;
   }
 }
 
