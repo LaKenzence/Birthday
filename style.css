@@ -58,6 +58,69 @@ html.intro-lock,html.intro-lock body{
   pointer-events:none;
 }
 
+.intro:after{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  background:radial-gradient(circle at 50% 45%, rgba(197,163,90,.18), transparent 62%);
+  animation:introGlowPulse 5s ease-in-out infinite;
+  pointer-events:none;
+}
+
+@keyframes introGlowPulse{
+  0%,100%{opacity:.55;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.08)}
+}
+
+.intro-corner-lights span{
+  position:absolute;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 9px 2px rgba(197,163,90,.7);
+  animation:runwayBlink 2.4s ease-in-out infinite;
+  pointer-events:none;
+}
+
+.intro-corner-lights span:nth-child(1){top:24px;left:24px}
+.intro-corner-lights span:nth-child(2){top:24px;right:24px;animation-delay:.6s}
+.intro-corner-lights span:nth-child(3){bottom:24px;left:24px;animation-delay:1.2s}
+.intro-corner-lights span:nth-child(4){bottom:24px;right:24px;animation-delay:1.8s}
+
+@keyframes runwayBlink{
+  0%,100%{opacity:.25;transform:scale(.8)}
+  50%{opacity:1;transform:scale(1.35)}
+}
+
+.intro-progress{
+  position:absolute;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:9px;
+  z-index:2;
+}
+
+.intro-progress .dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:rgba(246,240,228,.25);
+  transition:background .4s ease, transform .4s ease;
+}
+
+.intro-progress .dot.active{
+  background:var(--gold);
+  transform:scale(1.5);
+}
+
+@media(prefers-reduced-motion:reduce){
+  .intro:after{animation:none}
+  .intro-corner-lights span{animation:none;opacity:.7}
+}
+
 .intro.closing{
   opacity:0;
   visibility:hidden;
@@ -76,6 +139,7 @@ html.intro-lock,html.intro-lock body{
   transition:opacity 1s ease,transform 1s ease;
   pointer-events:none;
   padding:20px;
+  z-index:2;
 }
 
 .intro-step.active{
@@ -135,17 +199,54 @@ html.intro-lock,html.intro-lock body{
   display:flex;
   align-items:center;
   justify-content:center;
+  overflow:visible;
+}
+
+.intro-route-line:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity:0;
+  animation:routeShimmer 2.6s ease-in-out infinite;
+}
+
+@keyframes routeShimmer{
+  0%{opacity:0;transform:translateX(-100%)}
+  40%{opacity:.9}
+  100%{opacity:0;transform:translateX(100%)}
 }
 
 .intro-route-line span{
+  position:relative;
+  z-index:1;
   background:var(--navy);
   padding:0 6px;
 }
 
+@media(prefers-reduced-motion:reduce){
+  .intro-route-line:before{animation:none;opacity:0}
+}
+
 .intro-23{
+  position:relative;
   display:flex;
   font:600 clamp(110px,32vw,220px)/.8 "Playfair Display",serif;
   letter-spacing:-.06em;
+}
+
+.intro-23:before{
+  content:"";
+  position:absolute;
+  inset:-14% -10%;
+  background:radial-gradient(circle, rgba(197,163,90,.38), transparent 65%);
+  z-index:-1;
+  animation:digitGlow 2.2s ease-in-out infinite;
+}
+
+@keyframes digitGlow{
+  0%,100%{opacity:.5;transform:scale(.95)}
+  50%{opacity:1;transform:scale(1.08)}
 }
 
 .intro-23 .digit{
@@ -161,12 +262,36 @@ html.intro-lock,html.intro-lock body{
   to{opacity:1;transform:translateY(0) scale(1)}
 }
 
+@media(prefers-reduced-motion:reduce){
+  .intro-23:before{animation:none}
+}
+
 .intro-ready{
   font:500 11px "DM Mono",monospace;
   letter-spacing:.22em;
   text-transform:uppercase;
-  color:rgba(246,240,228,.6);
   margin-bottom:20px;
+  background:linear-gradient(90deg, rgba(246,240,228,.55) 0%, var(--gold) 50%, rgba(246,240,228,.55) 100%);
+  background-size:220% auto;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:textShimmer 2.6s linear infinite;
+}
+
+@keyframes textShimmer{
+  0%{background-position:200% center}
+  100%{background-position:-200% center}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .intro-ready{
+    animation:none;
+    -webkit-background-clip:unset;
+    background-clip:unset;
+    color:rgba(246,240,228,.6);
+    background:none;
+  }
 }
 
 .intro-btn{
@@ -2806,4 +2931,159 @@ html.party-off .cursor-spark{display:none !important}
 
 @media(max-width:560px){
   .live-counter{font-size:11px;padding:7px 12px}
+}
+
+/* ==========================================
+   INTRO — effet avion pousse a fond + declaration d'amour
+   ========================================== */
+
+/* ---- Nuages qui defilent pendant toute l'intro ---- */
+.intro-clouds{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+
+.intro-clouds span{
+  position:absolute;
+  color:rgba(246,240,228,.09);
+  font-size:44px;
+  filter:blur(1px);
+  animation:cloudDrift linear infinite;
+}
+
+.intro-clouds span:nth-child(1){top:16%;animation-duration:34s}
+.intro-clouds span:nth-child(2){top:64%;font-size:60px;animation-duration:46s;animation-delay:-14s}
+.intro-clouds span:nth-child(3){top:40%;font-size:32px;animation-duration:28s;animation-delay:-6s}
+
+@keyframes cloudDrift{
+  0%{transform:translateX(-20vw)}
+  100%{transform:translateX(120vw)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .intro-clouds{display:none}
+}
+
+/* ---- Avion qui traverse tout l'ecran pendant l'etape route ---- */
+.intro-plane-fly{
+  position:absolute;
+  top:46%;
+  left:-8%;
+  font-size:26px;
+  color:var(--gold);
+  z-index:1;
+  opacity:0;
+  pointer-events:none;
+}
+
+.intro-plane-fly .trail{
+  position:absolute;
+  top:50%;
+  right:100%;
+  width:130px;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(197,163,90,.6));
+  transform:translateY(-50%);
+}
+
+.intro-plane-fly.flying{
+  animation:planeCross 3.4s ease-in-out forwards;
+}
+
+@keyframes planeCross{
+  0%{opacity:0;left:-8%;transform:translateY(0)}
+  8%{opacity:1}
+  50%{transform:translateY(-12px)}
+  92%{opacity:1}
+  100%{opacity:0;left:104%;transform:translateY(0)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .intro-plane-fly.flying{animation:none;opacity:0}
+}
+
+/* ---- Readout coin bas-gauche, aviation + amour ---- */
+.intro-readout{
+  position:absolute;
+  bottom:26px;
+  left:26px;
+  font:400 9px "DM Mono",monospace;
+  letter-spacing:.14em;
+  color:rgba(197,163,90,.65);
+  text-transform:uppercase;
+  z-index:2;
+  text-align:left;
+  line-height:1.6;
+}
+
+@media(max-width:560px){
+  .intro-readout{display:none}
+}
+
+/* ---- Nouvelle etape: declaration d'amour dans l'intro ---- */
+.intro-love-line{margin-bottom:16px}
+
+.intro-love-line .heartbeat{font-size:30px}
+
+.intro-love-text{
+  font:italic 500 clamp(20px,5vw,32px)/1.4 "Playfair Display",serif;
+  color:var(--cream);
+  letter-spacing:.01em;
+}
+
+/* ==========================================
+   LETTRE — plaque de celebration
+   ========================================== */
+.celebration-plaque-wrap{
+  text-align:center;
+  margin-bottom:26px;
+}
+
+.celebration-plaque{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 20px;
+  border:1px solid rgba(197,163,90,.4);
+  border-radius:999px;
+  font:600 11px "DM Mono",monospace;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gold);
+  background:rgba(197,163,90,.07);
+}
+
+/* ==========================================
+   FINALE — grande declaration d'amour
+   ========================================== */
+.final-declaration{
+  margin-top:20px;
+  text-align:center;
+}
+
+.final-declaration-heart{
+  font-size:26px;
+  color:var(--red);
+  animation:heartbeatPulse 1.15s ease-in-out infinite;
+  margin-bottom:10px;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .final-declaration-heart{animation:none}
+}
+
+.final-declaration-text{
+  font:600 clamp(20px,5.5vw,34px)/1.3 "Playfair Display",serif;
+  color:var(--cream);
+  text-shadow:0 0 22px rgba(199,71,59,.45);
+  margin-bottom:12px;
+}
+
+.final-love-tagline{
+  font:400 12px "DM Mono",monospace;
+  letter-spacing:.1em;
+  color:rgba(246,240,228,.7);
 }
