@@ -235,8 +235,10 @@
     confettiSections.forEach(function(sec){ sec.classList.add('active'); });
   }
 
-  var steps = ['introStep1','introStep2','introStep3','introStep4'];
-  var delays = [300, 2100, 4000, 5900];
+  var steps = ['introStep1','introStep2','introStep3','introStep3b','introStep4'];
+  var delays = [300, 2100, 4000, 5700, 7300];
+  var introProgressDots = document.querySelectorAll('#introProgress .dot');
+  var introPlaneFly = document.getElementById('introPlaneFly');
 
   steps.forEach(function(id, i){
     setTimeout(function(){
@@ -244,6 +246,13 @@
         document.getElementById(steps[i-1]).classList.remove('active');
       }
       document.getElementById(id).classList.add('active');
+      if(id === 'introStep2' && introPlaneFly){
+        introPlaneFly.classList.add('flying');
+      }
+      if(introProgressDots.length){
+        introProgressDots.forEach(function(d){ d.classList.remove('active'); });
+        if(introProgressDots[i]) introProgressDots[i].classList.add('active');
+      }
     }, delays[i]);
   });
 
