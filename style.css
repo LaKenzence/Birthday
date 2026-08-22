@@ -3087,3 +3087,79 @@ html.party-off .cursor-spark{display:none !important}
   letter-spacing:.1em;
   color:rgba(246,240,228,.7);
 }
+
+.takeoff-fx{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  opacity:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+.intro.taking-off .takeoff-fx{opacity:1}
+
+.intro.taking-off{animation:introShake .45s linear 7}
+@keyframes introShake{
+  0%,100%{transform:translate(0,0)}
+  20%{transform:translate(-1px,1px)}
+  40%{transform:translate(1px,-1px)}
+  60%{transform:translate(-1px,-1px)}
+  80%{transform:translate(1px,1px)}
+}
+
+.takeoff-runway{
+  position:absolute;left:50%;bottom:0;width:2px;height:60%;
+  background:repeating-linear-gradient(to top, var(--gold) 0 26px, transparent 26px 60px);
+  transform:translateX(-50%);opacity:0;
+}
+.intro.taking-off .takeoff-runway{
+  animation:runwayRush 1.1s cubic-bezier(.5,0,.85,1) forwards;
+}
+@keyframes runwayRush{
+  0%{background-position-y:0;opacity:0}
+  10%{opacity:.5}
+  100%{background-position-y:1400px;opacity:0}
+}
+
+.takeoff-speedlines span{
+  position:absolute;top:50%;left:50%;width:1px;height:1px;
+  background:rgba(246,240,228,.5);
+  transform-origin:left center;opacity:0;
+}
+.intro.taking-off .takeoff-speedlines span{
+  animation:speedLineFly 1s ease-in forwards;
+}
+@keyframes speedLineFly{
+  0%{opacity:0;width:1px}
+  15%{opacity:.8}
+  100%{opacity:0;width:340px}
+}
+
+.takeoff-plane{
+  position:absolute;left:50%;top:62%;font-size:20px;color:var(--gold);
+  transform:translate(-50%,-50%) scale(1) rotate(0deg);opacity:0;
+}
+.intro.taking-off .takeoff-plane{
+  animation:planeTakeoff 1.3s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes planeTakeoff{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(1) rotate(0deg)}
+  10%{opacity:1}
+  60%{transform:translate(-50%,-90%) scale(3) rotate(-18deg)}
+  100%{opacity:0;transform:translate(-50%,-220%) scale(9) rotate(-24deg)}
+}
+
+.takeoff-flash{position:absolute;inset:0;background:var(--cream);opacity:0}
+.intro.taking-off .takeoff-flash{animation:takeoffFlash 1.3s ease forwards}
+@keyframes takeoffFlash{
+  0%,70%{opacity:0}
+  86%{opacity:.9}
+  100%{opacity:0}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .intro.taking-off{animation:none}
+  .takeoff-runway,.takeoff-speedlines span,.takeoff-plane,.takeoff-flash{
+    animation:none !important;opacity:0 !important;
+  }
+}
