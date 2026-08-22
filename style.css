@@ -1572,6 +1572,7 @@ html.intro-lock,html.intro-lock body{
 .final.active #finalStep4{animation-delay:1.35s}
 .final.active #finalStep5{animation-delay:1.95s}
 .final.active #finalStep6{animation-delay:2.3s}
+.final.active #finalStep7{animation-delay:2.65s}
 .final.active .final-plane{animation:planeAway 1.6s ease forwards;animation-delay:2.9s}
 
 @keyframes fadeUp{
@@ -2547,4 +2548,262 @@ html.party-off .fireworks{
     padding:8px 12px;
     font-size:9px;
   }
+}
+
+/* ==========================================
+   BIRTHDAY + AMOUR — coeurs flottants, pulsations, sceau
+   ========================================== */
+
+/* ---- Coeurs qui montent en continu sur toute la page ---- */
+.floating-hearts{
+  position:fixed;
+  inset:0;
+  z-index:6;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.floating-hearts span{
+  position:absolute;
+  bottom:-30px;
+  color:var(--red);
+  font-size:14px;
+  opacity:0;
+  animation:heartRise linear infinite;
+}
+
+.floating-hearts span:nth-child(3n){color:var(--blush);font-size:12px}
+.floating-hearts span:nth-child(3n+1){color:var(--gold);font-size:11px}
+
+@keyframes heartRise{
+  0%{transform:translateY(0) translateX(0) rotate(0deg);opacity:0}
+  10%{opacity:.85}
+  50%{transform:translateY(-52vh) translateX(14px) rotate(10deg)}
+  90%{opacity:.7}
+  100%{transform:translateY(-108vh) translateX(-12px) rotate(-8deg);opacity:0}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .floating-hearts{display:none}
+}
+
+html.party-off .floating-hearts{display:none !important}
+
+/* ---- Coeurs melanges dans les confettis existants ---- */
+.heart-piece{
+  background:none !important;
+  border-radius:0 !important;
+  width:auto !important;
+  height:auto !important;
+  font-size:12px;
+  line-height:1;
+  color:var(--red);
+}
+
+.heart-piece.blush{color:var(--blush)}
+.heart-piece.gold{color:var(--gold)}
+
+/* ---- Petit coeur qui bat, reutilisable partout ---- */
+.heartbeat{
+  display:inline-block;
+  color:var(--red);
+  animation:heartbeatPulse 1.15s ease-in-out infinite;
+  transform-origin:center;
+}
+
+@keyframes heartbeatPulse{
+  0%,100%{transform:scale(1)}
+  15%{transform:scale(1.28)}
+  30%{transform:scale(1)}
+  45%{transform:scale(1.2)}
+  60%{transform:scale(1)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .heartbeat{animation:none}
+}
+
+.cover-heart{
+  position:absolute;
+  bottom:-14px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:20px;
+  filter:drop-shadow(0 0 8px rgba(199,71,59,.55));
+}
+
+.stamp .heartbeat{
+  display:block;
+  font-size:13px;
+  margin-bottom:2px;
+}
+
+.letter-heading-heart{
+  font-size:.7em;
+  margin-left:8px;
+  vertical-align:2px;
+}
+
+.love-tagline{
+  margin-top:6px;
+  font:400 11px "DM Mono",monospace;
+  letter-spacing:.06em;
+  color:#9a8f7e;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.final-love{
+  margin-top:16px;
+  font:400 13px "DM Mono",monospace;
+  letter-spacing:.08em;
+  color:rgba(246,240,228,.75);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+
+.final-love .heartbeat{font-size:15px}
+
+/* ==========================================
+   BIRTHDAY CREATIVE — canon confettis, traine curseur,
+   sceau de cire, compteur en direct
+   ========================================== */
+
+/* ---- Canon a confettis au clic, n'importe ou sur la page ---- */
+.click-burst{
+  position:fixed;
+  width:0;
+  height:0;
+  z-index:9995;
+  pointer-events:none;
+}
+
+.click-burst i{
+  position:absolute;
+  width:6px;
+  height:10px;
+  background:var(--gold);
+  border-radius:1px;
+  opacity:0;
+  animation:clickBurstFly .8s ease-out forwards;
+}
+
+.click-burst i.heart-piece{
+  background:none;
+  border-radius:0;
+  font-size:12px;
+  color:var(--red);
+  width:auto;
+  height:auto;
+}
+
+.click-burst i:nth-child(3n){background:var(--red)}
+.click-burst i:nth-child(3n+2){background:var(--blush)}
+
+@keyframes clickBurstFly{
+  0%{opacity:1;transform:translate(0,0) scale(1)}
+  100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.4)}
+}
+
+html.party-off .click-burst{display:none !important}
+
+@media(prefers-reduced-motion:reduce){
+  .click-burst{display:none}
+}
+
+/* ---- Traine de coeurs/etincelles au curseur ---- */
+.cursor-spark{
+  position:fixed;
+  z-index:9994;
+  pointer-events:none;
+  font-size:13px;
+  color:var(--gold);
+  transform:translate(-50%,-50%);
+  animation:sparkFadeUp .9s ease-out forwards;
+}
+
+@keyframes sparkFadeUp{
+  0%{opacity:.85;transform:translate(-50%,-50%) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-160%) scale(.5)}
+}
+
+html.party-off .cursor-spark{display:none !important}
+
+@media(prefers-reduced-motion:reduce){
+  .cursor-spark{display:none}
+}
+
+/* ---- Sceau de cire a casser ---- */
+.wax-seal-block{
+  margin-top:30px;
+  text-align:center;
+}
+
+.wax-seal{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  border:none;
+  background:radial-gradient(circle at 34% 28%, #dd6a5a, var(--red) 72%);
+  color:var(--cream);
+  font:700 21px "Playfair Display",serif;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.25), inset 0 -4px 7px rgba(0,0,0,.28);
+  transition:transform .5s cubic-bezier(.34,1.56,.64,1), opacity .45s ease;
+}
+
+.wax-seal:hover{transform:scale(1.07) rotate(-3deg)}
+
+.wax-seal.cracked{
+  transform:scale(1.5) rotate(22deg);
+  opacity:0;
+  pointer-events:none;
+}
+
+.wax-seal-hint{
+  margin-top:9px;
+  font:400 10px "DM Mono",monospace;
+  letter-spacing:.08em;
+  color:#9a8f7e;
+  text-transform:uppercase;
+  transition:opacity .4s ease;
+}
+
+.wax-seal-hint.hidden{opacity:0}
+
+.wax-secret{
+  max-width:380px;
+  margin:6px auto 0;
+  font:italic 400 14px/1.6 "Playfair Display",serif;
+  color:#5c5342;
+  opacity:0;
+  max-height:0;
+  overflow:hidden;
+  transition:opacity .7s ease, max-height .7s ease, margin .7s ease;
+}
+
+.wax-secret.open{
+  opacity:1;
+  max-height:220px;
+  margin-top:16px;
+}
+
+/* ---- Compteur en direct, style tableau d'affichage aeroport ---- */
+.live-counter{
+  margin-top:18px;
+  display:inline-block;
+  font:500 13px "DM Mono",monospace;
+  letter-spacing:.08em;
+  color:var(--gold);
+  background:rgba(246,240,228,.06);
+  border:1px solid rgba(197,163,90,.35);
+  border-radius:8px;
+  padding:8px 16px;
+}
+
+@media(max-width:560px){
+  .live-counter{font-size:11px;padding:7px 12px}
 }
