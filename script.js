@@ -278,15 +278,39 @@
     }, 4200);
   }
 
+  /* ---- Takeoff effect: plays when the boarding-pass button is clicked ---- */
+  var takeoffFx = document.getElementById('takeoffFx');
+  var speedlinesBox = document.getElementById('takeoffSpeedlines');
+
+  function buildSpeedLines(){
+    if(!speedlinesBox) return;
+    speedlinesBox.innerHTML = '';
+    var n = 18;
+    for(var i=0;i<n;i++){
+      var line = document.createElement('span');
+      var angle = Math.random()*360;
+      var radius = 20 + Math.random()*20;
+      line.style.transform = 'translate(-50%,-50%) rotate(' + angle + 'deg) translateX(' + radius + '%)';
+      line.style.animationDelay = (Math.random()*0.3) + 's';
+      speedlinesBox.appendChild(line);
+    }
+  }
+
   document.getElementById('introBtn').addEventListener('click', function(){
     var intro = document.getElementById('intro');
-    intro.classList.add('closing');
-    document.documentElement.classList.remove('intro-lock');
-    spawnWelcomeBurst();
+
+    buildSpeedLines();
+    intro.classList.add('taking-off');
     playSong();
+
     setTimeout(function(){
-      intro.style.display = 'none';
-    }, 950);
+      intro.classList.add('closing');
+      document.documentElement.classList.remove('intro-lock');
+      spawnWelcomeBurst();
+      setTimeout(function(){
+        intro.style.display = 'none';
+      }, 950);
+    }, 1150);
   });
 
   var mapCard = document.getElementById('mapCard');
