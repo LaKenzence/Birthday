@@ -18,14 +18,127 @@
 
   applyPartyState();
 
+  /* Birthday song: starts on first interaction, tied to the party toggle */
+  var birthdaySong = document.getElementById('birthdaySong');
+
+  function playSong(){
+    if(!birthdaySong || partyOff) return;
+    birthdaySong.volume = 0.55;
+    var p = birthdaySong.play();
+    if(p && typeof p.catch === 'function'){ p.catch(function(){}); }
+  }
+
+  function pauseSong(){
+    if(!birthdaySong) return;
+    birthdaySong.pause();
+  }
+
   var partyToggleBtn = document.getElementById('partyToggle');
   if(partyToggleBtn){
     partyToggleBtn.addEventListener('click', function(){
       partyOff = !partyOff;
       try { window.localStorage.setItem('partyMode', partyOff ? 'off' : 'on'); } catch(e){}
       applyPartyState();
+      if(partyOff){
+        pauseSong();
+      } else {
+        playSong();
+      }
     });
   }
+
+  /* Confetti+heart cannon: click anywhere to make it pop */
+  function spawnClickBurst(x, y){
+    if(partyOff) return;
+    var burst = document.createElement('div');
+    burst.className = 'click-burst';
+    burst.style.left = x + 'px';
+    burst.style.top = y + 'px';
+    document.body.appendChild(burst);
+    var n = 12;
+    for(var i=0;i<n;i++){
+      var p = document.createElement('i');
+      var angle = Math.random() * 360;
+      var dist = 30 + Math.random() * 46;
+      var rad = angle * Math.PI / 180;
+      var dx = Math.cos(rad) * dist;
+      var dy = Math.sin(rad) * dist;
+      p.style.setProperty('--dx', dx + 'px');
+      p.style.setProperty('--dy', dy + 'px');
+      p.style.animationDelay = (Math.random() * 0.1) + 's';
+      if(i % 3 === 0){
+        p.classList.add('heart-piece');
+        p.textContent = '❤';
+      }
+      burst.appendChild(p);
+    }
+    setTimeout(function(){ burst.remove(); }, 900);
+  }
+
+  document.addEventListener('click', function(e){
+    var target = e.target;
+    if(target.closest('button, a, input, textarea, .party-toggle, .cake-candle, img, .photo-lightbox, .wax-seal')) return;
+    spawnClickBurst(e.clientX, e.clientY);
+  });
+
+  /* Soft cursor trail of hearts/sparkles on desktop */
+  var lastTrailTime = 0;
+  document.addEventListener('mousemove', function(e){
+    if(partyOff || reduceMotionGlobal) return;
+    var now = Date.now();
+    if(now - lastTrailTime < 100) return;
+    lastTrailTime = now;
+    var s = document.createElement('span');
+    s.className = 'cursor-spark';
+    s.textContent = Math.random() < 0.5 ? '❤' : '✦';
+    s.style.left = e.clientX + 'px';
+    s.style.top = e.clientY + 'px';
+    document.body.appendChild(s);
+    setTimeout(function(){ s.remove(); }, 900);
+  });
+
+  /* Wax seal: click to crack it open and reveal the hidden P.S. */
+  var waxSeal = document.getElementById('waxSeal');
+  var waxSecret = document.getElementById('waxSecret');
+  var waxSealHint = document.getElementById('waxSealHint');
+  if(waxSeal && waxSecret){
+    waxSeal.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(waxSeal.classList.contains('cracked')) return;
+      waxSeal.classList.add('cracked');
+      waxSeal.setAttribute('aria-expanded', 'true');
+      if(waxSealHint) waxSealHint.classList.add('hidden');
+      waxSecret.classList.add('open');
+      var rect = waxSeal.getBoundingClientRect();
+      spawnClickBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    });
+  }
+
+  /* Live counter styled like a flight-duration readout on the boarding pass */
+  var liveCounterEl = document.getElementById('liveCounter');
+  var BIRTHDAY_TARGET = new Date(2026, 7, 23, 0, 0, 0);
+
+  function padNum(n){ return n < 10 ? '0' + n : String(n); }
+
+  function updateLiveCounter(){
+    if(!liveCounterEl) return;
+    var now = new Date();
+    var diff = now - BIRTHDAY_TARGET;
+    var future = diff < 0;
+    var abs = Math.abs(diff);
+    var totalSeconds = Math.floor(abs / 1000);
+    var days = Math.floor(totalSeconds / 86400);
+    var hours = Math.floor((totalSeconds % 86400) / 3600);
+    var minutes = Math.floor((totalSeconds % 3600) / 60);
+    var seconds = totalSeconds % 60;
+    var timeStr = days + 'd ' + padNum(hours) + ':' + padNum(minutes) + ':' + padNum(seconds);
+    liveCounterEl.textContent = future
+      ? 'FLIGHT 23 · BOARDING IN ' + timeStr
+      : 'FLIGHT 23 · IN PROGRESS FOR ' + timeStr;
+  }
+
+  updateLiveCounter();
+  setInterval(updateLiveCounter, 1000);
 
   /* Click any real photo to open it full-screen in a polaroid. */
   var photoLightbox = document.getElementById('photoLightbox');
@@ -82,7 +195,26 @@
       ap.style.left = (Math.random()*100) + '%';
       ap.style.animationDuration = (9 + Math.random()*7) + 's';
       ap.style.animationDelay = (Math.random()*14) + 's';
+      if(a % 5 === 0){
+        ap.classList.add('heart-piece');
+        ap.textContent = '❤';
+      }
       ambientConfetti.appendChild(ap);
+    }
+  }
+
+  /* Coeurs qui montent en continu, en plus des confettis */
+  var floatingHearts = document.getElementById('floatingHearts');
+  if(floatingHearts && !reduceMotionGlobal && !partyOff){
+    var heartCount = 12;
+    var heartChars = ['❤','♥'];
+    for(var hh=0; hh<heartCount; hh++){
+      var hp = document.createElement('span');
+      hp.textContent = heartChars[hh % 2];
+      hp.style.left = (Math.random()*100) + '%';
+      hp.style.animationDuration = (10 + Math.random()*8) + 's';
+      hp.style.animationDelay = (Math.random()*16) + 's';
+      floatingHearts.appendChild(hp);
     }
   }
 
@@ -125,6 +257,11 @@
       piece.style.left = (Math.random()*100) + '%';
       piece.style.animationDelay = (Math.random()*0.6) + 's';
       piece.style.animationDuration = (2.4 + Math.random()*1.2) + 's';
+      if(i % 6 === 0){
+        piece.classList.add('heart-piece');
+        piece.textContent = '❤';
+        piece.style.fontSize = (11 + Math.random()*6) + 'px';
+      }
       welcomeBurst.appendChild(piece);
     }
     setTimeout(function(){
@@ -137,6 +274,7 @@
     intro.classList.add('closing');
     document.documentElement.classList.remove('intro-lock');
     spawnWelcomeBurst();
+    playSong();
     setTimeout(function(){
       intro.style.display = 'none';
     }, 950);
@@ -210,6 +348,10 @@
       piece.style.left = (5 + Math.random()*90) + '%';
       piece.style.animationDelay = (Math.random()*0.4) + 's';
       piece.style.animationDuration = (1.8 + Math.random()*0.8) + 's';
+      if(i % 5 === 0){
+        piece.classList.add('heart-piece');
+        piece.textContent = '❤';
+      }
       coverConfetti.appendChild(piece);
     }
   }
@@ -255,6 +397,11 @@
       piece.style.animationDelay = (Math.random()*0.7) + 's';
       piece.style.animationDuration = (2.1 + Math.random()*0.9) + 's';
       piece.style.transform = 'rotate(' + (Math.random()*40-20) + 'deg)';
+      if(i % 6 === 0){
+        piece.classList.add('heart-piece');
+        piece.textContent = '❤';
+        piece.style.fontSize = (12 + Math.random()*6) + 'px';
+      }
       confettiBox.appendChild(piece);
     }
   }
